@@ -611,7 +611,7 @@ footer {
         <div class="sub-nav">
           <button class="sub-btn" data-sub="men-tops">Tops</button>
           <button class="sub-btn" data-sub="men-bottoms">Bottoms</button>
-          <button class="sub-btn" data-sub="men-outer">Outerwear</button>
+          <button class="sub-btn" data-sub="men-outerwear">Outerwear</button>
         </div>
 
         <div class="sub-grid" id="men-tops" aria-hidden="true">
@@ -660,7 +660,7 @@ footer {
         <div class="sub-nav">
           <button class="sub-btn" data-sub="women-tops">Tops</button>
           <button class="sub-btn" data-sub="women-bottoms">Bottoms</button>
-          <button class="sub-btn" data-sub="women-outer">Outerwear</button>
+          <button class="sub-btn" data-sub="women-outerwear">Outerwear</button>
           <button class="sub-btn" data-sub="women-dress">Dress</button>
         </div>
 
@@ -1117,7 +1117,7 @@ allSubBtns.forEach(subBtn => {
   "Accessory 5": ["Blue", "Pink"],
   "Accessory 6": ["Red", "Green"],
   "Accessory 7": ["Green", "Black"],
-  "Accessory í": ["Green"],
+  "Accessory 8": ["Green"],
         
 
   // ---- Bottoms (5 colors each)
@@ -1176,7 +1176,7 @@ allSubBtns.forEach(subBtn => {
       if (type === 'bottom') {
         sizeOptions.classList.add('hidden');
         bottomSizeOptions.classList.remove('hidden');
-      } else if (type === 'top' || type === 'outer' || type === 'dress') {
+      } else if (type === 'top' || type === 'outerwear' || type === 'dress') {
         bottomSizeOptions.classList.add('hidden');
         sizeOptions.classList.remove('hidden');
       } else {
