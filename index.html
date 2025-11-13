@@ -1,0 +1,1404 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>ONEARTH Clothing</title>
+
+  <!-- =========================
+       🧵 PASTE YOUR ENTIRE CSS CODE BELOW
+       Example: everything from your styles.css
+       ========================= -->
+  <style>
+  /* =========================
+     START OF YOUR CSS
+     ========================= */
+  :root{
+  --green: #476B32; /* main earthy green */
+  --green-bright: #5c8a3f; /* slightly brighter for the brand name */
+  --muted: #6f6f6f;
+  --bg: #f6f8f4;
+  --card: #ffffff;
+  --radius: 14px;
+  --max-width: 1200px;
+  --accent: #e9efe6;
+  font-family: 'Montserrat', system-ui, -apple-system, 'Segoe UI', Roboto, sans-serif;
+}
+
+/* basic reset */
+*{box-sizing:border-box;margin:0;padding:0}
+html,body{height:100%;background:var(--bg);color:#222}
+img{display:block;max-width:100%}
+
+/* header */
+.site-header{
+  background:#ffffff;
+  border-bottom: 6px solid rgba(71,107,50,0.05);
+  position:sticky;
+  top:0;
+  z-index:30;
+  box-shadow: 0 6px 18px rgba(0,0,0,0.04);
+}
+.header-inner{
+  max-width:var(--max-width);
+  margin:0 auto;
+  display:flex;
+  align-items:center;
+  justify-content:space-between;
+  padding:18px 20px;
+}
+.brand{display:flex;align-items:center;gap:12px}
+.brand-logo{width:56px;height:56px;border-radius:10px;object-fit:cover}
+.brand-name{font-family:'Playfair Display', serif;font-size:20px;color:var(--green-bright);letter-spacing:1px}
+.tagline{font-size:12px;color:var(--muted);margin-top:4px}
+
+/* top icons */
+.top-icons{display:flex;gap:8px;align-items:center}
+.icon-btn{
+  background:transparent;
+  border:1px solid rgba(71,107,50,0.08);
+  padding:8px;
+  border-radius:10px;
+  display:inline-flex;
+  align-items:center;
+  justify-content:center;
+  cursor:pointer;
+  transition:all .18s ease;
+}
+.icon-btn:hover{transform:translateY(-3px);box-shadow:0 6px 14px rgba(71,107,50,0.08)}
+.icon-btn svg{color:var(--green);}
+
+/* dropdowns anchored under header, hidden by default */
+.dropdown{
+  position:absolute;
+  right:20px;
+  top:74px;
+  width:260px;
+  background:var(--card);
+  border-radius:10px;
+  box-shadow:0 12px 30px rgba(0,0,0,0.08);
+  display:none;
+  z-index:40;
+  overflow:hidden;
+}
+.dropdown-inner{padding:14px}
+.dropdown h4{margin-bottom:8px;color:var(--green);font-weight:600}
+.dropdown .link{display:block;color:#333;padding:6px 0;text-decoration:none}
+.cart-actions{display:flex;gap:8px;justify-content:flex-end;margin-top:8px}
+
+/* hero / carousel */
+.hero{margin-top:10px}
+.carousel{
+  position:relative;
+  height:420px;
+  overflow:hidden;
+  display:flex;
+  align-items:center;
+  justify-content:center;
+  margin-bottom: 60px; /* ⬅️ Add this line */
+}
+.slides{position:absolute;inset:0}
+.slide{
+  position:absolute;inset:0;background-size:cover;background-position:center center;
+  opacity:0;transition:opacity 800ms ease;
+}
+.slide.active{opacity:1}
+.carousel-arrow{
+  position:absolute;top:50%;transform:translateY(-50%);
+  background:rgba(255,255,255,0.85);
+  border:none;padding:10px;border-radius:50%;width:44px;height:44px;cursor:pointer;
+  box-shadow:0 6px 18px rgba(0,0,0,0.08)
+}
+.carousel-arrow.left{left:20px}
+.carousel-arrow.right{right:20px}
+.carousel-dots{position:absolute;left:50%;transform:translateX(-50%);bottom:40px;display:flex;gap:8px}
+.carousel-dots button{width:10px;height:10px;border-radius:50%;border:none;background:rgba(255,255,255,0.6);cursor:pointer}
+.carousel-dots button.active{background:var(--green)}
+
+/* hero caption overlay */
+.hero-caption{
+  position:relative;z-index:6;text-align:center;color:white;mix-blend-mode:normal;
+  text-shadow:0 6px 24px rgba(0,0,0,0.5);
+}
+.hero-caption h2{font-family:'Playfair Display',serif;font-size:64px;margin-bottom:6px;letter-spacing:2px}
+.hero-caption p{font-size:18px;margin-bottom:22px}
+.hero-cta .btn{margin:0 8px}
+
+/* collections */
+main{max-width:var(--max-width);margin:30px auto;padding:0 20px}
+.section-title{font-family:'Playfair Display',serif;font-size:36px;color:var(--green);text-align:center;margin-bottom:18px}
+.category-tabs{display:flex;gap:12px;justify-content:center;margin-bottom:6px}
+.cat-btn{padding:10px 18px;border-radius:12px;border:1px solid rgba(71,107,50,0.08);background:white;cursor:pointer}
+.cat-btn.active{background:var(--accent);border-color:rgba(71,107,50,0.12);box-shadow:0 6px 20px rgba(71,107,50,0.03)}
+
+/* sub nav and grids */
+.sub-nav {
+  display: flex;
+  gap: 8px; /* smaller gap */
+  flex-wrap: wrap;
+  margin-top: -8px; /* pull up closer to main tabs */
+  margin-bottom: 14px;
+  justify-content: center;
+}
+
+.sub-btn {
+  padding: 8px 14px;
+  border-radius: 10px;
+  border: 1px solid rgba(0, 0, 0, 0.06);
+  background: white;
+  cursor: pointer;
+  transition: all 0.2s ease;
+}
+
+.sub-btn:hover {
+  background: var(--accent);
+  border-color: var(--green);
+  color: var(--green);
+}
+
+.sub-btn.active {
+  background: var(--green);
+  color: white;
+  border-color: var(--green);
+  box-shadow: 0 3px 10px rgba(71, 107, 50, 0.15);
+}
+
+/* sub-grid (the product container) */
+.sub-grid {
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+  gap: 14px;
+  padding: 12px;
+  border-radius: 12px;
+  background: transparent;
+}
+
+.sub-grid[aria-hidden="true"] {
+  display: none;
+}
+
+.sub-grid[aria-hidden="true"]{display:none}
+.product{background:var(--card);border-radius:12px;overflow:hidden;cursor:pointer;box-shadow:0 6px 18px rgba(0,0,0,0.04)}
+.product img {
+  width: 100%;
+  height: 280px; /* fixed consistent height for all images */
+  object-fit: cover;
+  display: block;
+  border-radius: 10px;
+}/* square: 1:1 */
+.prod-info{display:flex;justify-content:space-between;padding:10px;font-size:14px}
+
+/* product modal */
+.modal{position:fixed;inset:0;display:none;align-items:center;justify-content:center;padding:20px;z-index:60}
+.modal[aria-hidden="false"]{display:flex;background:rgba(0,0,0,0.45)}
+.modal-content{background:var(--card);border-radius:14px;max-width:900px;width:100%;display:flex;gap:18px;padding:18px;position:relative}
+.modal-content.small{max-width:420px;flex-direction:column}
+.modal-left img{width:360px;height:360px;object-fit:cover;border-radius:10px}
+.modal-right{flex:1}
+.modal-close{position:absolute;right:12px;top:10px;border:none;background:transparent;font-size:26px;cursor:pointer}
+.field{margin:10px 0}
+.field label{display:block;font-size:13px;color:var(--muted);margin-bottom:6px}
+input[type="number"], input[type="tel"], input[type="text"], input[type="email"], select{width:100%;padding:8px;border-radius:8px;border:1px solid rgba(0,0,0,0.08)}
+.radio-row{display:flex;gap:10px;align-items:center}
+.modal-actions{display:flex;gap:10px;margin-top:10px}
+.btn{background:var(--green);color:white;padding:10px 14px;border-radius:10px;border:none;cursor:pointer}
+.btn.secondary{background:transparent;color:var(--green);border:1px solid rgba(71,107,50,0.12)}
+.btn.small{padding:6px 8px;font-size:13px}
+
+/* about and others */
+.about, .video-space, .faq, .return-policy{background:rgba(255,255,255,0.6);padding:22px;border-radius:12px;margin:18px 0}
+.about p{color:var(--muted);line-height:1.6}
+.video-placeholder{min-height:220px;display:flex;align-items:center;justify-content:center;border-radius:10px;background:linear-gradient(180deg, rgba(233,239,230,0.6), rgba(246,248,244,0.6))}
+.muted{color:var(--muted)}
+
+/* FAQ accordion */
+.accordion{margin-top:10px}
+.acc-item{border-bottom:1px solid rgba(0,0,0,0.04)}
+.acc-q{width:100%;text-align:left;padding:12px;background:transparent;border:none;cursor:pointer;font-weight:600}
+.acc-a{padding:0 12px 14px;display:none;color:var(--muted);line-height:1.5}
+.acc-item.open .acc-a{display:block}
+
+/* footer */
+.site-footer{margin-top:22px;background:transparent;padding:22px 20px}
+.footer-inner{max-width:var(--max-width);margin:0 auto;display:flex;justify-content:space-between;align-items:center;color:var(--muted)}
+.credits{position:fixed;right:12px;bottom:8px;color:var(--muted);font-size:12px}
+
+/* utility */
+.hidden{display:none}
+@media (max-width:1000px){
+  .sub-grid{grid-template-columns:repeat(3,1fr)}
+  .hero{height:360px}
+  .hero-caption h2{font-size:48px}
+  .modal-left img{width:240px;height:240px}
+}
+@media (max-width:700px){
+  .header-inner{padding:12px}
+  .brand-name{font-size:18px}
+  .top-icons{gap:6px}
+  .carousel{height:260px}
+  .hero-caption h2{font-size:28px}
+  .sub-grid{grid-template-columns:repeat(2,1fr)}
+  .modal-content{flex-direction:column;padding:12px}
+  .modal-left img{width:100%;height:220px}
+  /* mobile layout refinements */
+  .header-inner {
+    flex-wrap: wrap;
+  }
+
+  .brand {
+    flex: 1 1 100%;
+    justify-content: center;
+    text-align: center;
+    margin-bottom: 6px;
+  }
+
+  .brand-logo {
+    width: 46px;
+    height: 46px;
+  }
+
+  .brand-name {
+    font-size: 17px;
+  }
+
+  .top-icons {
+    justify-content: center;
+    width: 100%;
+    margin-top: 8px;
+    gap: 10px;
+  }
+
+  .icon-btn svg {
+    width: 22px;
+    height: 22px;
+ 
+  }
+
+  .hero-caption p {
+    font-size: 14px;
+    margin: 0 auto 20px;
+    max-width: 85%;
+     line-height: 1.4;
+  }
+     
+  .hero-cta {
+    margin-top: 10px;
+  } 
+  
+  .carousel {
+    height: 250px;
+  }
+  
+  .product img {
+    height: 200px;
+  }
+}
+
+.video-container {
+  position: relative;
+  width: 100%;
+  max-width: 800px;
+  margin: 0 auto;
+  padding-bottom: 56.25%; /* 16:9 aspect ratio */
+  height: 0;
+  overflow: hidden;
+  border-radius: 12px;
+  box-shadow: 0 4px 10px rgba(0,0,0,0.1);
+}
+
+.video-container iframe {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  border: none;
+}
+
+/* -------------------------------
+   CENTER ABOUT US + YOUTUBE
+--------------------------------*/
+#about, 
+#youtube {
+  text-align: center;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+}
+
+#about p {
+  max-width: 700px;
+  margin: 10px auto;
+  line-height: 1.6;
+}
+
+#youtube iframe {
+  max-width: 100%;
+  width: 560px;
+  height: 315px;
+  border-radius: 12px;
+}
+
+/* ---------- FOOTER FIX (FINAL) ---------- */
+footer {
+  background: var(--bg); /* match site’s light grey-white background */
+  color: var(--muted);
+  text-align: center;
+  padding: 40px 20px 20px 20px;
+  border-top: 1px solid rgba(0, 0, 0, 0.05);
+  margin-top: 40px;
+}
+
+.footer-content h3 {
+  font-size: 20px;
+  font-weight: 700;
+  color: var(--green);
+  margin-bottom: 8px;
+}
+
+.footer-content p {
+  color: #666;
+  margin-bottom: 20px;
+  font-size: 15px;
+}
+
+/* --- OUR TEAM SECTION --- */
+#team-section {
+  text-align: center;
+  margin: 10px 0 30px 0;
+}
+
+.team-title {
+  font-size: 18px;
+  font-weight: 600;
+  color: var(--green);
+  margin-bottom: 8px;
+}
+
+#toggleTeamBtn {
+  background: var(--green);
+  color: white;
+  border: none;
+  padding: 8px 16px;
+  border-radius: 10px;
+  cursor: pointer;
+  transition: background 0.2s ease;
+}
+
+#toggleTeamBtn:hover {
+  background: var(--green-bright);
+}
+
+.team-names {
+  margin-top: 8px;
+  color: #888;
+  font-size: 14px;
+}
+
+.hidden {
+  display: none;
+}
+
+/* --- FOOTER BOTTOM (Credits + Contact) --- */
+.footer-bottom {
+  font-size: 13px;
+  color: #888;
+  margin-top: 20px;
+}
+
+.footer-bottom a {
+  color: #6b8a61;
+  text-decoration: none;
+}
+
+.footer-bottom a:hover {
+  text-decoration: underline;
+  color: var(--green);
+}
+
+/* --- FINAL FIX for YouTube text alignment (for <h4>) --- */
+#youtube {
+  width: 100%;
+  text-align: center !important;
+  margin: 60px auto;
+  display: flex;
+  flex-direction: column;
+  align-items: center !important;
+  justify-content: center !important;
+}
+
+#youtube h4 {
+  text-align: center !important;
+  margin: 0 auto 20px auto !important;
+  font-size: 24px;
+  font-weight: 600;
+  color: var(--green);
+  width: 100%;
+}
+  
+/* Shop Collections Layout */
+.category-buttons, .subcategory-buttons {
+  display: flex;
+  justify-content: center;
+  gap: 1rem;
+  margin-bottom: 1rem;
+  flex-wrap: wrap;
+}
+
+.category-btn, .subcategory-btn {
+  background-color: #f3f3f3;
+  border: none;
+  padding: 0.6rem 1.2rem;
+  border-radius: 12px;
+  cursor: pointer;
+  font-weight: 500;
+  transition: all 0.2s ease;
+}
+
+.category-btn.active, .subcategory-btn.active {
+  background-color: #556b2f;
+  color: white;
+}
+
+.product-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+  gap: 1.5rem;
+  justify-items: center;
+}
+
+.product-card img {
+  width: 100%;
+  border-radius: 16px;
+  transition: transform 0.3s ease;
+}
+
+.product-card img:hover {
+  transform: scale(1.05);
+} 
+ 
+  /* =========================
+     END OF YOUR CSS
+     ========================= */
+  </style>
+</head>
+<body>
+
+  <!-- =========================
+       🧱 PASTE YOUR ENTIRE HTML CODE BELOW
+       Example: everything between <body> ... </body>
+       ========================= --
+<body>
+  <!-- Header / top bar -->
+  <header class="site-header">
+    <div class="header-inner">
+      <div class="brand">
+        <img src="https://i.pinimg.com/1200x/69/e9/ec/69e9ecfa3decc8f517221b9fb96886dd.jpg" alt="ONEARTH logo" class="brand-logo" />
+        <div class="brand-text">
+          <h1 class="brand-name">ONEARTH</h1>
+          <div class="tagline"></div>
+        </div>
+      </div>
+
+      <nav class="top-icons" aria-label="Top icons">
+        <!-- cart placed left so it's beside home as requested -->
+        <button class="icon-btn" id="cartBtn" aria-haspopup="true" aria-expanded="false" title="Cart">
+          <!-- cart svg -->
+          <svg viewBox="0 0 24 24" width="20" height="20" aria-hidden="true"><path d="M7 4h-2l-1 2h2l3.6 7.59L9.25 17A1 1 0 0 0 10 18h8v-2H11.42l1.1-2.2L20 6H7z" fill="currentColor"/></svg>
+        </button>
+
+        <button class="icon-btn" id="homeBtn" title="Home" aria-haspopup="true" aria-expanded="false">
+          <svg viewBox="0 0 24 24" width="20" height="20" aria-hidden="true"><path d="M10 20v-6h4v6h5v-8h3L12 3 2 12h3v8z" fill="currentColor"/></svg>
+        </button>
+
+        <button class="icon-btn" id="contactBtn" title="Contact" aria-haspopup="true" aria-expanded="false">
+          <svg viewBox="0 0 24 24" width="20" height="20" aria-hidden="true"><path d="M21 8V7l-3 2-2-1-4 3V9L3 4 2 5v13l2 1 17-8z" fill="currentColor"/></svg>
+        </button>
+
+        <button class="icon-btn" id="loginBtn" title="Log In" aria-haspopup="true" aria-expanded="false">
+          <svg viewBox="0 0 24 24" width="20" height="20" aria-hidden="true"><path d="M12 12a5 5 0 1 0 0-10 5 5 0 0 0 0 10zm-7 9v-1a4 4 0 0 1 4-4h6a4 4 0 0 1 4 4v1z" fill="currentColor"/></svg>
+        </button>
+
+        <button class="icon-btn" id="signupBtn" title="Sign Up" aria-haspopup="true" aria-expanded="false">
+          <svg viewBox="0 0 24 24" width="20" height="20" aria-hidden="true"><path d="M12 2l2 6 6 1-4.5 3.5L18 19l-6-3-6 3 .5-6.5L2 9l6-1z" fill="currentColor"/></svg>
+        </button>
+      </nav>
+    </div>
+
+    <!-- icon dropdowns / small popups -->
+    <div class="dropdown" id="cartDropdown" aria-hidden="true">
+      <div class="dropdown-inner">
+        <h4>Your Cart</h4>
+        <div class="cart-items" id="cartItems">
+          <p class="muted">Your cart is empty.</p>
+        </div>
+        <div class="cart-actions">
+          <button class="btn small">View Cart</button>
+          <button class="btn small secondary">Checkout</button>
+        </div>
+      </div>
+    </div>
+
+    <div class="dropdown" id="homeDropdown" aria-hidden="true">
+      <div class="dropdown-inner">
+        <h4>Quick Links</h4>
+        <a href="#collections" class="link">Shop Collections</a>
+        <a href="#about" class="link">About</a>
+        <a href="#faq" class="link">FAQ</a>
+      </div>
+    </div>
+
+    <div class="dropdown" id="contactDropdown" aria-hidden="true">
+      <div class="dropdown-inner">
+        <h4>Contact Us</h4>
+        <p>Email: onearthclothingline@gmail.com</p>
+        <p>Phone: +123 456 7890</p>
+        <a href="#contact" class="link">Contact form</a>
+      </div>
+    </div>
+  </header>
+
+  <!-- HERO / Carousel -->
+  <section class="hero">
+    <div class="carousel" id="carousel">
+      <div class="slides">
+        <div class="slide" style="background-image:url('https://i.pinimg.com/1200x/85/20/5d/85205dc2fc4c119ae924e6af1be20261.jpg')"></div>
+        <div class="slide" style="background-image:url('https://i.pinimg.com/1200x/18/ae/8f/18ae8f752b8fbbdcd6bcdac01451f250.jpg')"></div>
+        <div class="slide" style="background-image:url('https://i.pinimg.com/1200x/2f/aa/25/2faa2563e705c204e53a621053dd8eb5.jpg')"></div>
+      </div>
+
+      <button class="carousel-arrow left" id="prev">&lt;</button>
+      <button class="carousel-arrow right" id="next">&gt;</button>
+      <div class="carousel-dots" id="dots"></div>
+
+      <div class="hero-caption">
+        <h2>ONEARTH</h2>
+        <p>One person. One purpose. One look</p>
+        <div class="hero-cta">
+          <a href="#collections" class="btn">Shop Now</a>
+          <a href="#about" class="btn secondary">Learn More</a>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Collections -->
+  <main>
+    <section id="collections" class="collections">
+      <h3 class="section-title">Shop Collections</h3>
+
+      <!-- Category Buttons -->
+<div class="category-buttons">
+  <button class="category-btn active" data-category="men">Men</button>
+  <button class="category-btn" data-category="women">Women</button>
+  <button class="category-btn" data-category="accessories">Accessories</button>
+</div>
+
+<!-- Subcategory Buttons -->
+<div class="subcategory buttons">
+  <!-- JS will create buttons here -->
+</div>
+
+<!-- Product Grid -->
+<div class="product-grid" id="product-grid">
+  <!-- JS will show the products here -->
+      </div>
+      </main>
+
+      <!-- Men -->
+      <div class="category-panel" id="men">
+        <div class="sub-nav">
+          <button class="sub-btn" data-sub="men-tops">Tops</button>
+          <button class="sub-btn" data-sub="men-bottoms">Bottoms</button>
+          <button class="sub-btn" data-sub="men-outer">Outerwear</button>
+        </div>
+
+        <div class="sub-grid" id="men-tops" aria-hidden="true">
+          <!-- 8 products -->
+          <!-- Each product has data attributes for type so popup knows which sizes to show -->
+          <div class="product" data-type="top" data-name="Men Top 1">
+            <img src="https://i.pinimg.com/1200x/b7/db/f5/b7dbf5f1a2f365b8b8197d595b5be2c4.jpg" alt="product">
+            <div class="prod-info"><strong>Men Top 1</strong><span>$29</span></div>
+          </div>
+          <div class="product" data-type="top" data-name="Men Top 2"><img src="https://i.pinimg.com/1200x/ce/a5/6a/cea56ad397f76528271a33265653d6e3.jpg" alt="product"><div class="prod-info"><strong>Men Top 2</strong><span>$34</span></div></div>
+          <div class="product" data-type="top" data-name="Men Top 3"><img src="https://i.pinimg.com/1200x/c4/00/c3/c400c317c8660702112ef6f018603129.jpg" alt="product"><div class="prod-info"><strong>Men Top 3</strong><span>$39</span></div></div>
+          <div class="product" data-type="top" data-name="Men Top 4"><img src="https://i.pinimg.com/1200x/1b/35/aa/1b35aa9dba0623bc1c192c035eb5791e.jpg" alt="product"><div class="prod-info"><strong>Men Top 4</strong><span>$45</span></div></div>
+          <div class="product" data-type="top" data-name="Men Top 5"><img src="https://i.pinimg.com/1200x/61/6b/9a/616b9a0f168d844f3e1db1566ab053e1.jpg" alt="product"><div class="prod-info"><strong>Men Top 5</strong><span>$31</span></div></div>
+          <div class="product" data-type="top" data-name="Men Top 6"><img src="https://i.pinimg.com/1200x/d0/9b/bb/d09bbb2ec0e0c059a1036f6a9a029f88.jpg" alt="product"><div class="prod-info"><strong>Men Top 6</strong><span>$37</span></div></div>
+          <div class="product" data-type="top" data-name="Men Top 7"><img src="https://i.pinimg.com/1200x/b1/87/fa/b187fa7e4ae9b88b11026b9edc64623c.jpg" alt="product"><div class="prod-info"><strong>Men Top 7</strong><span>$28</span></div></div>
+          <div class="product" data-type="top" data-name="Men Top 8"><img src="https://i.pinimg.com/1200x/66/67/99/6667995686c297e41369d6ff4951a460.jpg" alt="product"><div class="prod-info"><strong>Men Top 8</strong><span>$42</span></div></div>
+        </div>
+
+        <div class="sub-grid" id="men-bottoms" aria-hidden="true">
+          <!-- 8 bottoms (sizes 24-32) -->
+          <div class="product" data-type="bottom" data-name="Men Bottom 1"><img src="https://i.pinimg.com/1200x/63/c8/4a/63c84abd175637b11e72ca0f4866afd4.jpg" alt="product"><div class="prod-info"><strong>Men Bottom 1</strong><span>$49</span></div></div>
+          <div class="product" data-type="bottom" data-name="Men Bottom 2"><img src="https://i.pinimg.com/1200x/62/18/2c/62182cba744417d4671e24313187f3a5.jpg" alt="product"><div class="prod-info"><strong>Men Bottom 2</strong><span>$54</span></div></div>
+          <div class="product" data-type="bottom" data-name="Men Bottom 3"><img src="https://i.pinimg.com/1200x/d9/42/75/d94275675c83d616a9cd84dec2d2cec6.jpg" alt="product"><div class="prod-info"><strong>Men Bottom 3</strong><span>$58</span></div></div>
+          <div class="product" data-type="bottom" data-name="Men Bottom 4"><img src="https://i.pinimg.com/1200x/7f/fa/a4/7ffaa441bf79c56f7038e4db8176e412.jpg" alt="product"><div class="prod-info"><strong>Men Bottom 4</strong><span>$44</span></div></div>
+          <div class="product" data-type="bottom" data-name="Men Bottom 5"><img src="https://i.pinimg.com/1200x/3d/0d/af/3d0daf268d46e7da7b7eb4d9cef69ae3.jpg" alt="product"><div class="prod-info"><strong>Men Bottom 5</strong><span>$51</span></div></div>
+          <div class="product" data-type="bottom" data-name="Men Bottom 6"><img src="https://i.pinimg.com/1200x/7f/d1/bf/7fd1bfbf272059b6b9a46346515585f3.jpg" alt="product"><div class="prod-info"><strong>Men Bottom 6</strong><span>$46</span></div></div>
+          <div class="product" data-type="bottom" data-name="Men Bottom 7"><img src="https://i.pinimg.com/1200x/92/6e/c4/926ec4ec5d88c8ec8d5e80804843590b.jpg" alt="product"><div class="prod-info"><strong>Men Bottom 7</strong><span>$48</span></div></div>
+          <div class="product" data-type="bottom" data-name="Men Bottom 8"><img src="https://i.pinimg.com/1200x/e5/d6/70/e5d6702038c5278775a4b48d73132f73.jpg" alt="product"><div class="prod-info"><strong>Men Bottom 8</strong><span>$52</span></div></div>
+        </div>
+
+        <div class="sub-grid" id="men-outer" aria-hidden="true">
+          <!-- 8 outerwear -->
+          <div class="product" data-type="outer" data-name="Men Outer 1"><img src="https://i.pinimg.com/1200x/f3/f6/25/f3f625a882fea7bfb89825a7d7c97ab3.jpg" alt="product"><div class="prod-info"><strong>Men Outer 1</strong><span>$79</span></div></div>
+          <div class="product" data-type="outer" data-name="Men Outer 2"><img src="https://i.pinimg.com/1200x/5c/b1/b9/5cb1b95115795f654aedf3ba726bdfd4.jpg" alt="product"><div class="prod-info"><strong>Men Outer 2</strong><span>$90</span></div></div>
+          <div class="product" data-type="outer" data-name="Men Outer 3"><img src="https://i.pinimg.com/1200x/9b/ff/5d/9bff5d3bb358b8803b7cad0d11f490e3.jpg" alt="product"><div class="prod-info"><strong>Men Outer 3</strong><span>$85</span></div></div>
+          <div class="product" data-type="outer" data-name="Men Outer 4"><img src="https://i.pinimg.com/1200x/95/83/09/958309a430a19a19811b6c8d05a3b477.jpg" alt="product"><div class="prod-info"><strong>Men Outer 4</strong><span>$95</span></div></div>
+          <div class="product" data-type="outer" data-name="Men Outer 5"><img src="https://i.pinimg.com/1200x/b7/21/20/b721202a715a4aca982efcc0dcc92943.jpg" alt="product"><div class="prod-info"><strong>Men Outer 5</strong><span>$99</span></div></div>
+          <div class="product" data-type="outer" data-name="Men Outer 6"><img src="https://i.pinimg.com/1200x/55/0e/79/550e792cbae2653450224c0b5b3b14e9.jpg" alt="product"><div class="prod-info"><strong>Men Outer 6</strong><span>$82</span></div></div>
+          <div class="product" data-type="outer" data-name="Men Outer 7"><img src="https://i.pinimg.com/1200x/93/9e/cc/939ecce8b947197bf682b407f8c56b6f.jpg" alt="product"><div class="prod-info"><strong>Men Outer 7</strong><span>$88</span></div></div>
+          <div class="product" data-type="outer" data-name="Men Outer 8"><img src="https://i.pinimg.com/1200x/4b/b8/87/4bb88756c19c4bc1a705894ad8cc177f.jpg" alt="product"><div class="prod-info"><strong>Men Outer 8</strong><span>$84</span></div></div>
+        </div>
+      </div>
+
+      <!-- Women -->
+      <div class="category-panel hidden" id="women">
+        <div class="sub-nav">
+          <button class="sub-btn" data-sub="women-tops">Tops</button>
+          <button class="sub-btn" data-sub="women-bottoms">Bottoms</button>
+          <button class="sub-btn" data-sub="women-outer">Outerwear</button>
+          <button class="sub-btn" data-sub="women-dress">Dress</button>
+        </div>
+
+        <div class="sub-grid" id="women-tops" aria-hidden="true">
+          <!-- 8 items -->
+          <div class="product" data-type="top" data-name="Women Top 1"><img src="https://i.pinimg.com/736x/82/3e/08/823e0825d4b4dd3d8c871c68071017b7.jpg" alt="product"><div class="prod-info"><strong>Women Top 1</strong><span>$32</span></div></div>
+          <div class="product" data-type="top" data-name="Women Top 2"><img src="https://i.pinimg.com/736x/fb/51/e6/fb51e673090524a5f5e0682638d72a1c.jpg" alt="product"><div class="prod-info"><strong>Women Top 2</strong><span>$36</span></div></div>
+          <div class="product" data-type="top" data-name="Women Top 3"><img src="https://i.pinimg.com/736x/5a/5a/15/5a5a1533ef223d7d997f512585d08713.jpg" alt="product"><div class="prod-info"><strong>Women Top 3</strong><span>$38</span></div></div>
+          <div class="product" data-type="top" data-name="Women Top 4"><img src="https://i.pinimg.com/736x/7f/7a/6b/7f7a6b0dca5df55ad69caeb523cba728.jpg" alt="product"><div class="prod-info"><strong>Women Top 4</strong><span>$33</span></div></div>
+          <div class="product" data-type="top" data-name="Women Top 5"><img src="https://i.pinimg.com/736x/19/37/76/1937761c0ad9e9b039a4df7342c8cacd.jpg" alt="product"><div class="prod-info"><strong>Women Top 5</strong><span>$35</span></div></div>
+          <div class="product" data-type="top" data-name="Women Top 6"><img src="https://i.pinimg.com/736x/a9/a0/e0/a9a0e0324193f7cd340ca1b42a17db29.jpg" alt="product"><div class="prod-info"><strong>Women Top 6</strong><span>$39</span></div></div>
+          <div class="product" data-type="top" data-name="Women Top 7"><img src="https://i.pinimg.com/736x/70/fd/7e/70fd7ec61caa039a67e927ca3786ea0a.jpg" alt="product"><div class="prod-info"><strong>Women Top 7</strong><span>$30</span></div></div>
+          <div class="product" data-type="top" data-name="Women Top 8"><img src="https://i.pinimg.com/736x/5c/64/b9/5c64b953afd3c2c0ce94d107de0735e8.jpg" alt="product"><div class="prod-info"><strong>Women Top 8</strong><span>$41</span></div></div>
+        </div>
+
+        <div class="sub-grid" id="women-bottoms" aria-hidden="true">
+          <!-- bottoms 24-32 -->
+          <div class="product" data-type="bottom" data-name="Women Bottom 1"><img src="https://i.pinimg.com/1200x/d9/b0/d0/d9b0d0a9608d5bb412a751fd28e24f5a.jpg" alt="product"><div class="prod-info"><strong>Women Bottom 1</strong><span>$46</span></div></div>
+          <div class="product" data-type="bottom" data-name="Women Bottom 2"><img src="https://i.pinimg.com/1200x/77/9a/b6/779ab69d12413fdc6f0b4d982ed0417c.jpg" alt="product"><div class="prod-info"><strong>Women Bottom 2</strong><span>$42</span></div></div>
+          <div class="product" data-type="bottom" data-name="Women Bottom 3"><img src="https://i.pinimg.com/1200x/76/be/3b/76be3b763c9879210953c0c3d06005a1.jpg" alt="product"><div class="prod-info"><strong>Women Bottom 3</strong><span>$49</span></div></div>
+          <div class="product" data-type="bottom" data-name="Women Bottom 4"><img src="https://i.pinimg.com/1200x/59/a9/52/59a952155a4160447b51c006c8245efc.jpg" alt="product"><div class="prod-info"><strong>Women Bottom 4</strong><span>$47</span></div></div>
+          <div class="product" data-type="bottom" data-name="Women Bottom 5"><img src="https://i.pinimg.com/1200x/26/96/f6/2696f6eee5b98eb7eb475a32cfc7e854.jpg" alt="product"><div class="prod-info"><strong>Women Bottom 5</strong><span>$40</span></div></div>
+          <div class="product" data-type="bottom" data-name="Women Bottom 6"><img src="https://i.pinimg.com/1200x/d2/c9/d4/d2c9d4ec715dbfbb9cded85371c9b308.jpg" alt="product"><div class="prod-info"><strong>Women Bottom 6</strong><span>$45</span></div></div>
+          <div class="product" data-type="bottom" data-name="Women Bottom 7"><img src="https://i.pinimg.com/1200x/55/14/07/55140767f9f741061295bd8f5ebf8d14.jpg" alt="product"><div class="prod-info"><strong>Women Bottom 7</strong><span>$43</span></div></div>
+          <div class="product" data-type="bottom" data-name="Women Bottom 8"><img src="https://i.pinimg.com/1200x/19/d0/dc/19d0dcb98e24a66c4e9f9aad314c031a.jpg" alt="product"><div class="prod-info"><strong>Women Bottom 8</strong><span>$50</span></div></div>
+        </div>
+
+        <div class="sub-grid" id="women-outer" aria-hidden="true">
+          <!-- 8 outerwear -->
+          <div class="product" data-type="outer" data-name="Women Outer 1"><img src="https://i.pinimg.com/1200x/c9/b8/06/c9b80642628d3840ca578f76897cf40d.jpg" alt="product"><div class="prod-info"><strong>Women Outer 1</strong><span>$94</span></div></div>
+          <div class="product" data-type="outer" data-name="Women Outer 2"><img src="https://i.pinimg.com/1200x/c0/d0/ca/c0d0ca9831095721ef32252b5fc2747b.jpg" alt="product"><div class="prod-info"><strong>Women Outer 2</strong><span>$88</span></div></div>
+          <div class="product" data-type="outer" data-name="Women Outer 3"><img src="https://i.pinimg.com/1200x/65/a7/1d/65a71dc6a692ba50729908d943fefacc.jpg" alt="product"><div class="prod-info"><strong>Women Outer 3</strong><span>$99</span></div></div>
+          <div class="product" data-type="outer" data-name="Women Outer 4"><img src="https://i.pinimg.com/1200x/d9/68/16/d968160fbf3e52dac5e9441a8106248d.jpg" alt="product"><div class="prod-info"><strong>Women Outer 4</strong><span>$85</span></div></div>
+          <div class="product" data-type="outer" data-name="Women Outer 5"><img src="https://i.pinimg.com/1200x/7d/23/6a/7d236a463bd08843fdc60240ec51aa39.jpg" alt="product"><div class="prod-info"><strong>Women Outer 5</strong><span>$91</span></div></div>
+          <div class="product" data-type="outer" data-name="Women Outer 6"><img src="https://i.pinimg.com/1200x/4d/25/b2/4d25b23e6e3ebd4b06a486e5b2007216.jpg" alt="product"><div class="prod-info"><strong>Women Outer 6</strong><span>$97</span></div></div>
+          <div class="product" data-type="outer" data-name="Women Outer 7"><img src="https://i.pinimg.com/1200x/f6/18/69/f6186944a79ea17b30b5ca22bd82a1ea.jpg" alt="product"><div class="prod-info"><strong>Women Outer 7</strong><span>$89</span></div></div>
+          <div class="product" data-type="outer" data-name="Women Outer 8"><img src="https://i.pinimg.com/1200x/b0/0b/1b/b00b1bacc52210fd240da7d77e9f6378.jpg" alt="product"><div class="prod-info"><strong>Women Outer 8</strong><span>$83</span></div></div>
+        </div>
+
+        <div class="sub-grid" id="women-dress" aria-hidden="true">
+          <!-- 8 dresses -->
+          <div class="product" data-type="dress" data-name="Dress 1"><img src="https://i.pinimg.com/1200x/b3/53/cb/b353cb1a98f436650825a997b2dfa491.jpg" alt="product"><div class="prod-info"><strong>Dress 1</strong><span>$69</span></div></div>
+          <div class="product" data-type="dress" data-name="Dress 2"><img src="https://i.pinimg.com/1200x/82/b0/bf/82b0bf622da9da29bd92a654b8bbbefe.jpg" alt="product"><div class="prod-info"><strong>Dress 2</strong><span>$72</span></div></div>
+          <div class="product" data-type="dress" data-name="Dress 3"><img src="https://i.pinimg.com/1200x/ce/6e/3a/ce6e3a3c954c6a5227f681724c4eef0f.jpg" alt="product"><div class="prod-info"><strong>Dress 3</strong><span>$64</span></div></div>
+          <div class="product" data-type="dress" data-name="Dress 4"><img src="https://i.pinimg.com/1200x/45/f1/53/45f1531b3d643cf57c4904f8674d7288.jpg" alt="product"><div class="prod-info"><strong>Dress 4</strong><span>$78</span></div></div>
+          <div class="product" data-type="dress" data-name="Dress 5"><img src="https://i.pinimg.com/1200x/e1/f9/88/e1f988b94fb52b359bfcc2f1466c7cfa.jpg" alt="product"><div class="prod-info"><strong>Dress 5</strong><span>$66</span></div></div>
+          <div class="product" data-type="dress" data-name="Dress 6"><img src="https://i.pinimg.com/1200x/2b/c2/1f/2bc21fdaa2294d8a49484391ecb5bc37.jpg" alt="product"><div class="prod-info"><strong>Dress 6</strong><span>$74</span></div></div>
+          <div class="product" data-type="dress" data-name="Dress 7"><img src="https://i.pinimg.com/1200x/f3/b7/6f/f3b76f49334e032642787d88640ab53f.jpg" alt="product"><div class="prod-info"><strong>Dress 7</strong><span>$68</span></div></div>
+          <div class="product" data-type="dress" data-name="Dress 8"><img src="https://i.pinimg.com/1200x/14/10/d5/1410d59353a4b013b7cf9332735c6439.jpg" alt="product"><div class="prod-info"><strong>Dress 8</strong><span>$71</span></div></div>
+        </div>
+      </div>
+
+      <!-- Accessories -->
+      <div class="category-panel hidden" id="accessories">
+        <div class="sub-nav">
+          <!-- accessories doesn't have sub-categories in brief but we show grid directly -->
+        </div>
+
+        <div class="sub-grid active" id="accessories-grid" aria-hidden="false">
+          <!-- 8 accessories -->
+          <div class="product" data-type="accessory" data-name="Accessory 1"><img src="https://i.pinimg.com/1200x/50/26/50/5026507f275713544ce5e2081c43aa23.jpg" alt="product"><div class="prod-info"><strong>Accessory 1</strong><span>$15</span></div></div>
+          <div class="product" data-type="accessory" data-name="Accessory 2"><img src="https://i.pinimg.com/1200x/d2/38/fa/d238faca53bb661d86744715cad2453e.jpg" alt="product"><div class="prod-info"><strong>Accessory 2</strong><span>$18</span></div></div>
+          <div class="product" data-type="accessory" data-name="Accessory 3"><img src="https://i.pinimg.com/1200x/b6/e9/94/b6e994dc68f293deec188b1ed9b198f4.jpg" alt="product"><div class="prod-info"><strong>Accessory 3</strong><span>$22</span></div></div>
+          <div class="product" data-type="accessory" data-name="Accessory 4"><img src="https://i.pinimg.com/1200x/6b/8a/63/6b8a637e985340105b3a462d30e7cc10.jpg" alt="product"><div class="prod-info"><strong>Accessory 4</strong><span>$20</span></div></div>
+          <div class="product" data-type="accessory" data-name="Accessory 5"><img src="https://i.pinimg.com/1200x/86/96/52/869652d4b884fa5a08bc5e594e48cbeb.jpg" alt="product"><div class="prod-info"><strong>Accessory 5</strong><span>$11</span></div></div>
+          <div class="product" data-type="accessory" data-name="Accessory 6"><img src="https://i.pinimg.com/1200x/57/cf/57/57cf576dc73b5f5683d47ffcc3f5e236.jpg" alt="product"><div class="prod-info"><strong>Accessory 6</strong><span>$14</span></div></div>
+          <div class="product" data-type="accessory" data-name="Accessory 7"><img src="https://i.pinimg.com/1200x/e8/12/c6/e812c6e01ae9d2bdfb7e2d02ddcf64f0.jpg" alt="product"><div class="prod-info"><strong>Accessory 7</strong><span>$19</span></div></div>
+          <div class="product" data-type="accessory" data-name="Accessory 8"><img src="https://i.pinimg.com/1200x/14/64/6f/14646fac8fcb87c45fbe8dcafa0e3b6a.jpg" alt="product"><div class="prod-info"><strong>Accessory 8</strong><span>$13</span></div></div>
+        </div>
+      </div>
+    </section>
+
+    <!-- Product popup modal -->
+    <div class="modal" id="productModal" aria-hidden="true">
+      <div class="modal-content" role="dialog" aria-modal="true">
+        <button class="modal-close" id="modalClose">×</button>
+        <div class="modal-left">
+          <img id="modalImage" src="" alt="Product image">
+        </div>
+        <div class="modal-right">
+          <h3 id="modalName">Product Name</h3>
+          <p class="price" id="modalPrice">$0</p>
+
+          <div id="sizeOptions" class="field">
+            <label>Size</label>
+            <select id="sizeSelect">
+              <option>S</option>
+              <option>M</option>
+              <option>L</option>
+              <option>XL</option>
+            </select>
+          </div>
+
+          <div id="bottomSizeOptions" class="field hidden">
+            <label>Waist Size</label>
+            <select id="waistSelect">
+              <option>24</option><option>25</option><option>26</option><option>27</option><option>28</option><option>29</option><option>30</option><option>31</option><option>32</option>
+            </select>
+          </div>
+
+          <div class="field">
+            <label>Color</label>
+            <select id="colorSelect">
+              <option>Olive</option><option>Beige</option><option>Black</option><option>White</option>
+            </select>
+          </div>
+
+          <div class="field">
+            <label>Quantity</label>
+            <input type="number" id="quantity" value="1" min="1" />
+          </div>
+
+          <div class="field">
+            <label>Payment method</label>
+            <div class="radio-row">
+              <label><input type="radio" name="payment" value="maya" checked /> Maya</label>
+              <label><input type="radio" name="payment" value="gcash" /> GCash</label>
+              <label><input type="radio" name="payment" value="paypal" /> Paypal</label>
+            </div>
+          </div>
+
+          <div class="field">
+            <label>Phone Number</label>
+            <input type="tel" id="phoneInput" placeholder=" xxxx xxx xxxx" />
+          </div>
+
+          <div class="modal-actions">
+            <button class="btn" id="addToCartBtn">Add to Cart</button>
+            <button class="btn secondary" id="buyNowBtn">Buy Now</button>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- About -->
+    <section id="about" class="about">
+      <h4>About ONEARTH</h4>
+      <p>ONEARTH is a mindful clothing brand focused on simple, premium essentials that honour the planet. We use clean silhouettes, earth-inspired palettes, and durable materials to create wardrobe staples that stand the test of time. Our designs are minimal so your choices can be intentional. We believe small daily decisions in how we dress can add up to meaningful change for our environment.</p>
+    </section>
+
+    <!-- YouTube placeholder -->
+    <section class="video-space" style="text-align: center;">
+      <h4>Watch Us on YouTube</h4>
+      <div class="video-container">
+        <iframe
+                
+       src="https://www.youtube.com/embed/T9KyxQdx90M?si=gNJy5Kb5GstXeRCF" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" referrerpolicy="strict-origin-when-cross-origin" allowfullscreen></iframe><!-- Replace with your iframe later -->
+      </div>
+    </section>
+
+    <!-- FAQ -->
+    <section id="faq" class="faq">
+      <h4>FAQ</h4>
+      <div class="accordion">
+        <div class="acc-item">
+          <button class="acc-q">What is your return policy?</button>
+          <div class="acc-a"><p>We accept returns within 14 days of delivery for unworn items with tags. See the Return Policy section below for full details.</p></div>
+        </div>
+        <div class="acc-item">
+          <button class="acc-q">How long will delivery take?</button>
+          <div class="acc-a"><p>Shipping typically takes 3–7 business days locally and 10–20 days internationally depending on courier and destination.</p></div>
+        </div>
+        <div class="acc-item">
+          <button class="acc-q">What materials do you use?</button>
+          <div class="acc-a"><p>We prioritize natural fibers and recycled materials wherever possible. Each product page includes material breakdowns.</p></div>
+        </div>
+        <div class="acc-item">
+          <button class="acc-q">Can I exchange sizes?</button>
+          <div class="acc-a"><p>Exchanges are handled via our returns portal subject to stock availability. Contact us for assistance.</p></div>
+        </div>
+        <div class="acc-item">
+          <button class="acc-q">Do you offer wholesale?</button>
+          <div class="acc-a"><p>Yes, we work with selected wholesale partners. Please reach out to our business contact for terms.</p></div>
+        </div>
+      </div>
+    </section>
+
+    <!-- Return Policy -->
+    <section class="return-policy">
+      <h4>Return Policy</h4>
+      <p>We accept returns for eligible items within 14 days. Items must be unused, in original condition, and include all tags and packaging. Return shipping costs may apply unless otherwise noted. Refunds are issued to the original payment method after inspection.</p>
+    </section>
+  </main>
+
+  <!-- Footer -->
+ <footer>
+  <div class="footer-content">
+    <h3>ONEARTH Clothing</h3>
+    <p>Thank you for supporting sustainable fashion!</p>
+  </div>
+
+  <!-- Our Team Section -->
+  <div id="team-section">
+    <h4 class="team-title">Our Team</h4>
+    <button id="toggleTeamBtn" class="btn secondary">Show Members</button>
+    <div id="teamNames" class="team-names hidden">
+      <p>Lamson</p>
+      <p>Rigos</p>
+      <p>Bautista</p>
+      <p>Barte</p>
+      <p>Ao</p>
+      <p>Villafane</p>
+    </div>
+  </div>
+
+  <!-- Contact + Credits -->
+  <div class="footer-bottom">
+    <p>© 2025 ONEARTH. All rights reserved.  
+      <a href="mailto:onearthclothingline@gmail.com">onearthclothingline@gmail.com</a> •  
+      <a href="tel:+1234567890">+123 456 7890</a>
+    </p>
+  </div>
+  </footer>
+
+  <!-- Login modal -->
+  <div class="modal" id="loginModal" aria-hidden="true">
+    <div class="modal-content small" role="dialog" aria-modal="true">
+      <button class="modal-close" data-close="loginModal">×</button>
+      <h3>Log In</h3>
+      <div class="field"><label>Email</label><input type="email" id="loginEmail" /></div>
+      <div class="field"><label>Password</label><input type="password" id="loginPass" /></div>
+      <div class="modal-actions"><button class="btn">Log In</button></div>
+    </div>
+  </div>
+
+  <!-- Sign up modal -->
+  <div class="modal" id="signupModal" aria-hidden="true">
+    <div class="modal-content small" role="dialog" aria-modal="true">
+      <button class="modal-close" data-close="signupModal">×</button>
+      <h3>Sign Up</h3>
+      <div class="field"><label>Name</label><input type="text" id="signupName" /></div>
+      <div class="field"><label>Email</label><input type="email" id="signupEmail" /></div>
+      <div class="field"><label>Password</label><input type="password" id="signupPass" /></div>
+      <div class="modal-actions"><button class="btn">Create account</button></div>
+    </div>
+  </div>
+
+  <script src="script.js"></script>
+  <!-- Confirm Purchase Modal -->
+<div class="modal" id="confirmModal" aria-hidden="true">
+  <div class="modal-content small" role="dialog" aria-modal="true">
+    <button class="modal-close" onclick="closeConfirm()">×</button>
+    <h3 style="color:var(--green);">Confirm Purchase</h3>
+    <p>Are you sure you want to buy it now?</p>
+    <div class="modal-actions">
+      <button class="btn" onclick="confirmPurchase()">Confirm</button>
+      <button class="btn secondary" onclick="closeConfirm()">Cancel</button>
+    </div>
+  </div>
+</div>
+</body>
+
+
+  <!-- =========================
+       🧱 END OF YOUR HTML CODE
+       ========================= -->
+
+  <!-- =========================
+       ⚙️ PASTE YOUR ENTIRE JAVASCRIPT CODE BELOW
+       Example: everything from your scripts.js
+       ========================= -->
+  <script>
+  // =========================
+  // START OF YOUR JAVASCRIPT
+  // =========================
+// Basic interactivity for the ONEARTH demo site
+
+document.addEventListener('DOMContentLoaded', function () {
+  // ---------------- HEADER DROPDOWNS ----------------
+  const cartBtn = document.getElementById('cartBtn');
+  const cartDropdown = document.getElementById('cartDropdown');
+  const homeBtn = document.getElementById('homeBtn');
+  const homeDropdown = document.getElementById('homeDropdown');
+  const contactBtn = document.getElementById('contactBtn');
+  const contactDropdown = document.getElementById('contactDropdown');
+
+  function toggleDropdown(btn, el) {
+    const open = el.style.display === 'block';
+    [cartDropdown, homeDropdown, contactDropdown].forEach(d => d.style.display = 'none');
+    el.style.display = open ? 'none' : 'block';
+  }
+
+  cartBtn.addEventListener('click', () => toggleDropdown(cartBtn, cartDropdown));
+  homeBtn.addEventListener('click', () => toggleDropdown(homeBtn, homeDropdown));
+  contactBtn.addEventListener('click', () => toggleDropdown(contactBtn, contactDropdown));
+
+  document.addEventListener('click', e => {
+    if (!e.target.closest('.icon-btn') && !e.target.closest('.dropdown')) {
+      [cartDropdown, homeDropdown, contactDropdown].forEach(d => d.style.display = 'none');
+    }
+  });
+
+  // ---------------- CAROUSEL ----------------
+  const slides = Array.from(document.querySelectorAll('.slide'));
+  const dotsContainer = document.getElementById('dots');
+  let current = 0, timer;
+
+  function showSlide(i) {
+    slides.forEach((s, idx) => s.classList.toggle('active', idx === i));
+    dotsContainer.innerHTML = '';
+    slides.forEach((_, idx) => {
+      const b = document.createElement('button');
+      if (idx === i) b.classList.add('active');
+      b.addEventListener('click', () => { resetTimer(); showSlide(idx); });
+      dotsContainer.appendChild(b);
+    });
+    current = i;
+  }
+
+  function autoAdvance() {
+    showSlide((current + 1) % slides.length);
+  }
+
+  function resetTimer() {
+    clearInterval(timer);
+    timer = setInterval(autoAdvance, 5000);
+  }
+
+  document.getElementById('prev').addEventListener('click', () => { resetTimer(); showSlide((current - 1 + slides.length) % slides.length);});
+  document.getElementById('next').addEventListener('click', () => { resetTimer(); showSlide((current + 1) % slides.length);});
+  showSlide(0);
+  timer = setInterval(autoAdvance, 5000);
+
+  // ---------------- CATEGORY + SUBCATEGORY HANDLER (single unified block) ----------------
+const catBtns = document.querySelectorAll('.cat-btn');
+const panels = document.querySelectorAll('.category-panel');
+
+// When a main category button is clicked
+catBtns.forEach(btn => {
+  btn.addEventListener('click', () => {
+    // toggle active class on main buttons
+    catBtns.forEach(b => b.classList.remove('active'));
+    btn.classList.add('active');
+
+    // hide all category panels, then show selected panel
+    panels.forEach(p => p.classList.add('hidden'));
+    const id = btn.dataset.cat;
+    const activePanel = document.getElementById(id);
+    if (!activePanel) return;
+    activePanel.classList.remove('hidden');
+
+    // handle sub-buttons inside the active panel
+    const panelSubBtns = Array.from(activePanel.querySelectorAll('.sub-btn'));
+    const panelSubGrids = Array.from(activePanel.querySelectorAll('.sub-grid'));
+
+    if (id === 'accessories') {
+      // accessories: hide sub-buttons and show grid if present
+      panelSubBtns.forEach(sb => sb.classList.add('hidden'));
+      panelSubGrids.forEach(g => g.setAttribute('aria-hidden', 'false'));
+    } else {
+      // normal categories (men/women): show sub-buttons
+      panelSubBtns.forEach(sb => sb.classList.remove('hidden'));
+      // default: hide all sub-grids, then show the first
+      panelSubGrids.forEach(g => g.setAttribute('aria-hidden', 'true'));
+      const firstSub = panelSubBtns[0]?.dataset.sub;
+      if (firstSub) {
+        const firstGrid = document.getElementById(firstSub);
+        if (firstGrid) firstGrid.setAttribute('aria-hidden', 'false');
+        // mark the first sub-btn active visually
+        panelSubBtns.forEach(sb => sb.classList.remove('active'));
+        panelSubBtns[0].classList.add('active');
+      }
+    }
+
+    // optionally scroll to collections heading
+    const collectionsEl = document.getElementById('collections');
+    if (collectionsEl) {
+      window.scrollTo({ top: collectionsEl.offsetTop - 80, behavior: 'smooth' });
+    }
+  });
+});
+
+// Single subcategory click handler (use different var name to avoid duplicates)
+const allSubBtns = document.querySelectorAll('.sub-btn');
+allSubBtns.forEach(subBtn => {
+  subBtn.addEventListener('click', () => {
+    const panel = subBtn.closest('.category-panel');
+    if (!panel) return;
+
+    // visual state
+    panel.querySelectorAll('.sub-btn').forEach(b => b.classList.remove('active'));
+    subBtn.classList.add('active');
+
+    // hide everything in this panel then show the target
+    const subGrids = panel.querySelectorAll('.sub-grid');
+    subGrids.forEach(sg => sg.setAttribute('aria-hidden', 'true'));
+
+    const targetId = subBtn.dataset.sub;
+    const target = document.getElementById(targetId);
+    if (target) target.setAttribute('aria-hidden', 'false');
+
+    // scroll slightly so the grid is centered/viewable
+    if (target) target.scrollIntoView({ behavior: 'smooth', block: 'center' });
+  });
+});
+  
+  // ---------------- PRODUCT MODALS ----------------
+  const productModal = document.getElementById('productModal');
+  const modalClose = document.getElementById('modalClose');
+  const modalImage = document.getElementById('modalImage');
+  const modalName = document.getElementById('modalName');
+  const modalPrice = document.getElementById('modalPrice');
+  const sizeOptions = document.getElementById('sizeOptions');
+  const bottomSizeOptions = document.getElementById('bottomSizeOptions');
+
+  document.querySelectorAll('.product').forEach(prod => {
+    prod.addEventListener('click', () => {
+      const img = prod.querySelector('img').src;
+      const name = prod.dataset.name || 'Product';
+      const price = prod.querySelector('.prod-info span') ? prod.querySelector('.prod-info span').innerText : '$0';
+      const type = prod.dataset.type || 'accessory';
+      modalImage.src = img;
+      modalName.textContent = name;
+      modalPrice.textContent = price;
+
+  // 🎨 Dynamic color options for each product
+      const colorSelect = document.getElementById('colorSelect');
+      const productName = name;
+
+      // define color sets
+      const productColors = {
+        "Men Top 1": ["Khaki", "Black", "White", "Olive"],
+        "Men Top 2": ["Charcoal Gray", "Black", "White", "Navy"],
+        "Men Top 3": ["Ivory", "Beige", "Olive", "Black"],
+        "Men Top 4": ["Mink", "Beige", "Black", "Brown"],
+        "Men Top 5": ["Beige", "White", "Blue", "Gray"],
+        "Men Top 6": ["Olive", "White", "Black", "Olive"],
+        "Men Top 7": ["Marine", "White", "Olive", "Black"],
+        "Men Top 8": ["Emerald", "White", "Gray", "Beige"],
+
+        "Women Top 1": ["Beige", "White", "Black", "Olive"],
+        "Women Top 2": ["Cream", "Beige", "White", "Brown"],
+        "Women Top 3": ["White", "Beige", "Gray", "Black"],
+        "Women Top 4": ["Olive", "White", "Beige", "Brown"],
+        "Women Top 5": ["Beige", "Black", "White", "Olive"],
+        "Women Top 6": ["White", "Beige", "Olive", "Brown"],
+        "Women Top 7": ["Beige", "White", "Black", "Gray"],
+        "Women Top 8": ["Cream", "Beige", "White", "Olive"],
+
+        "Dress 1": ["White", "Beige", "Black", "Olive"],
+        "Dress 2": ["Pink", "Beige", "White", "Black"],
+        "Dress 3": ["Brown", "Beige", "White", "Olive"],
+        "Dress 4": ["Olive", "White", "Beige", "Gray"],
+        "Dress 5": ["Beige", "White", "Black", "Brown"],
+        "Dress 6": ["White", "Cream", "Beige", "Olive"],
+        "Dress 7": ["Beige", "White", "Gray", "Brown"],
+        "Dress 8": ["Pink", "White", "Beige", "Olive"],
+      };
+
+      // update color options dynamically
+      if (colorSelect) {
+        colorSelect.innerHTML = "";
+        const colors = productColors[productName] || ["Olive", "Beige", "Black", "White"];
+        colors.forEach(color => {
+          const opt = document.createElement("option");
+          opt.textContent = color;
+          colorSelect.appendChild(opt);
+        });
+      }
+      
+      if (type === 'bottom') {
+        sizeOptions.classList.add('hidden');
+        bottomSizeOptions.classList.remove('hidden');
+      } else if (type === 'top' || type === 'outer' || type === 'dress') {
+        bottomSizeOptions.classList.add('hidden');
+        sizeOptions.classList.remove('hidden');
+      } else {
+        bottomSizeOptions.classList.add('hidden');
+        sizeOptions.classList.add('hidden');
+      }
+
+      productModal.setAttribute('aria-hidden', 'false');
+      productModal.style.display = 'flex';
+    });
+  });
+
+  modalClose.addEventListener('click', closeProductModal);
+
+  function closeProductModal() {
+    productModal.setAttribute('aria-hidden', 'true');
+    productModal.style.display = 'none';
+  }
+
+  // ---------------- LOGIN / SIGNUP MODALS ----------------
+  function openModal(id) {
+    const el = document.getElementById(id);
+    el.setAttribute('aria-hidden', 'false');
+    el.style.display = 'flex';
+  }
+  function closeModal(id) {
+    const el = document.getElementById(id);
+    el.setAttribute('aria-hidden', 'true');
+    el.style.display = 'none';
+  }
+
+  document.getElementById('loginBtn').addEventListener('click', () => openModal('loginModal'));
+  document.getElementById('signupBtn').addEventListener('click', () => openModal('signupModal'));
+
+  document.querySelectorAll('.modal-close').forEach(btn => {
+    const target = btn.dataset && btn.dataset.close;
+    btn.addEventListener('click', () => {
+      if (target) closeModal(target);
+      else {
+        const modal = btn.closest('.modal');
+        if (modal) { modal.setAttribute('aria-hidden','true'); modal.style.display='none'; }
+      }
+    });
+  });
+
+  document.querySelectorAll('.modal').forEach(m => {
+    m.addEventListener('click', (e) => {
+      if (e.target === m) { m.setAttribute('aria-hidden','true'); m.style.display='none'; }
+    });
+  });
+
+  // ---------------- FAQ ----------------
+  document.querySelectorAll('.acc-q').forEach(q => {
+    q.addEventListener('click', () => q.parentElement.classList.toggle('open'));
+  });
+
+  // ---------------- FOOTER ----------------
+  const yearEl = document.getElementById('year');
+if (yearEl) yearEl.textContent = new Date().getFullYear();
+
+  // ---------------- ESC KEY CLOSE ----------------
+  document.addEventListener('keydown', e => {
+    if (e.key === 'Escape') {
+      [cartDropdown, homeDropdown, contactDropdown].forEach(d => d.style.display = 'none');
+      document.querySelectorAll('.modal').forEach(m => { m.setAttribute('aria-hidden','true'); m.style.display='none'; });
+    }
+  });
+});
+
+// ---------------- BUY NOW CONFIRMATION ----------------
+document.addEventListener("DOMContentLoaded", () => {
+  document.querySelectorAll(".btn").forEach(btn => {
+    if (btn.textContent.trim().toLowerCase() === "buy now") {
+      btn.addEventListener("click", showConfirm);
+    }
+  });
+});
+
+function showConfirm() {
+  const confirmModal = document.getElementById('confirmModal');
+  if (!confirmModal) return;
+  confirmModal.setAttribute('aria-hidden', 'false');
+  confirmModal.style.display = 'flex';
+}
+
+function closeConfirm() {
+  const confirmModal = document.getElementById('confirmModal');
+  if (!confirmModal) return;
+  confirmModal.setAttribute('aria-hidden', 'true');
+  confirmModal.style.display = 'none';
+}
+
+function confirmPurchase() {
+  closeConfirm();
+  document.querySelectorAll('.modal[aria-hidden="false"]').forEach(modal => {
+    if (modal.id !== 'confirmModal') {
+      modal.setAttribute('aria-hidden', 'true');
+      modal.style.display = 'none';
+    }
+  });
+  alert('Thank you for purchasing! 💗');
+}
+
+document.getElementById('confirmModal')?.addEventListener('click', e => {
+  if (e.target.id === 'confirmModal') closeConfirm();
+});
+document.addEventListener('keydown', e => {
+  if (e.key === 'Escape') closeConfirm();
+});
+
+// ---------------- CART SYSTEM WITH REMOVE SUPPORT ----------------
+let cart = [];
+
+function addToCart(productName) {
+  if (!productName) productName = "Item";
+  cart.push(productName);
+  updateCartUI();
+}
+
+function removeFromCart(index) {
+  cart.splice(index, 1);
+  updateCartUI();
+}
+
+function clearCart() {
+  cart = [];
+  updateCartUI();
+}
+
+function updateCartUI() {
+  const cartContainer = document.getElementById("cartItems");
+  if (!cartContainer) return;
+
+  if (cart.length === 0) {
+    cartContainer.innerHTML = `<p class="muted">Your cart is empty.</p>`;
+    return;
+  }
+
+  cartContainer.innerHTML = cart
+    .map(
+      (item, i) => `
+      <div class="cart-item" style="display:flex;justify-content:space-between;align-items:center;margin-bottom:8px;">
+        <span>${item}</span>
+        <button class="btn small secondary" onclick="removeFromCart(${i})">Remove</button>
+      </div>`
+    )
+    .join("");
+}
+
+// auto-bind add to cart buttons
+document.addEventListener("DOMContentLoaded", () => {
+  document.querySelectorAll(".btn").forEach((btn) => {
+    if (btn.textContent.trim().toLowerCase() === "add to cart") {
+      btn.addEventListener("click", () => {
+        const productName =
+          btn.closest(".modal-content")?.querySelector("h3, .prod-name")?.textContent || "Product";
+        addToCart(productName);
+      });
+    }
+  });
+});
+
+// --- SHOP COLLECTIONS FUNCTIONALITY ---
+
+const products = {
+  men: {
+    tops: ["men_top1.jpg", "men_top2.jpg", "men_top3.jpg"],
+    bottoms: ["men_bottom1.jpg", "men_bottom2.jpg"],
+    outerwear: ["men_outer1.jpg", "men_outer2.jpg"]
+  },
+  women: {
+    tops: ["women_top1.jpg", "women_top2.jpg"],
+    bottoms: ["women_bottom1.jpg", "women_bottom2.jpg"],
+    outerwear: ["women_outer1.jpg"],
+    dress: ["women_dress1.jpg", "women_dress2.jpg"]
+  },
+  accessories: ["bag1.jpg", "hat1.jpg", "belt1.jpg"]
+};
+
+// Select elements
+const categoryButtons = document.querySelectorAll(".category-btn");
+const subcategoryContainer = document.getElementById("subcategory-buttons");
+const productGrid = document.getElementById("product-grid");
+
+function showProducts(category, subcategory = null) {
+  productGrid.innerHTML = "";
+  let items = [];
+
+  if (subcategory) {
+    items = products[category][subcategory] || [];
+  } else {
+    items = products[category];
+  }
+
+  if (Array.isArray(items)) {
+    items.forEach(img => {
+      const card = document.createElement("div");
+      card.classList.add("product-card");
+      card.innerHTML = `<img src="images/${img}" alt="">`;
+      productGrid.appendChild(card);
+    });
+  }
+}
+
+categoryButtons.forEach(btn => {
+  btn.addEventListener("click", () => {
+    categoryButtons.forEach(b => b.classList.remove("active"));
+    btn.classList.add("active");
+    const category = btn.dataset.category;
+
+    subcategoryContainer.innerHTML = "";
+
+    if (category === "accessories") {
+      showProducts("accessories");
+      return;
+    }
+
+    const subs = Object.keys(products[category]);
+    subs.forEach((sub, i) => {
+      const subBtn = document.createElement("button");
+      subBtn.classList.add("subcategory-btn");
+      subBtn.textContent = sub.charAt(0).toUpperCase() + sub.slice(1);
+      if (i === 0) subBtn.classList.add("active");
+      subBtn.addEventListener("click", () => {
+        document.querySelectorAll(".subcategory-btn").forEach(b => b.classList.remove("active"));
+        subBtn.classList.add("active");
+        showProducts(category, sub);
+      });
+      subcategoryContainer.appendChild(subBtn);
+    });
+
+    const firstSub = subs[0];
+    showProducts(category, firstSub);
+  });
+});
+
+// Default load: Men Tops
+showProducts("men", "tops");
+
+// CATEGORY SWITCHING
+const categoryBtns = document.querySelectorAll('.category-btn');
+const categoryPanels = document.querySelectorAll('.category-panel');
+
+categoryBtns.forEach(btn => {
+  btn.addEventListener('click', () => {
+    // Remove active state from all buttons
+    categoryBtns.forEach(b => b.classList.remove('active'));
+    btn.classList.add('active');
+
+    // Hide all panels
+    categoryPanels.forEach(panel => panel.classList.add('hidden'));
+
+    // Show the selected category
+    const selected = btn.getAttribute('data-category');
+    const targetPanel = document.getElementById(selected);
+    if (targetPanel) targetPanel.classList.remove('hidden');
+  });
+});
+
+// --- OUR TEAM toggle ---
+const toggleTeamBtn = document.getElementById('toggleTeamBtn');
+const teamNames = document.getElementById('teamNames');
+
+toggleTeamBtn.addEventListener('click', () => {
+  teamNames.classList.toggle('hidden');
+  toggleTeamBtn.textContent = teamNames.classList.contains('hidden')
+    ? 'Show Members'
+    : 'Hide Members';
+});
+  
+
+  // =========================
+  // END OF YOUR JAVASCRIPT
+  // =========================
+  </script>
+</body>
+</html>
